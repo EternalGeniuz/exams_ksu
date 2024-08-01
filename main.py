@@ -1,8 +1,12 @@
 import os
+import random
 import sys
 import time
+from array import array
 
 import psutil
+
+import main
 
 special_chars = "This is \"a new line\nThis is a tab\tEnd of the string"
 print(special_chars)
@@ -115,18 +119,18 @@ print(data.foo)
 
 class Stranger:
     def __init__(self, x):
-        self.x = x
+        self.__x = x
 
     def __str__(self):
-        return str(self.x)
+        return str(self.__x)
 
     def __call__(self, n=5):
         print('Вызов метода __call__')
-        return (self.x * n)
+        return (self.__x * n)
 
     @classmethod
-    def z(self, n=7):
-        return self(n)
+    def z(cls, n=7):
+        return cls(n)
 
 
 s = Stranger(3)
@@ -152,3 +156,32 @@ int
 
 list
 
+a = list(random.randint(1, 20) for i in range(10))
+# b = list(random.randint(1, 20) for i in range(10))
+
+print(a[::2])
+print(a)
+
+
+class MyList(list):
+    def __le__(self, other):
+        return True
+
+
+print(a[-1:-len(a)])
+
+b = list(a[i] for i in range(len(a) - 1, -1, -1))
+
+c = 'Hello Python!'
+print(b)
+
+my_array = array('i', (random.randint(1, 20) for i in range(10)))
+
+print(my_array)
+
+c_list = list(c)
+
+print(c_list)
+
+d_list = list(map(str, input()))
+print(d_list)

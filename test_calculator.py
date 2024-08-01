@@ -1,9 +1,9 @@
-import pytest
+from pytest import mark, fixture
 
 from calculator import Calculator
 
 
-@pytest.fixture()
+@fixture()
 def calc():
     return Calculator()
 
@@ -11,11 +11,11 @@ def calc():
 list1 = [3000000000, 100000000]
 
 
-@pytest.mark.parametrize('a, b, expected_result', [(1, 2, 3),
-                                                   (1, 1, 2),
-                                                   (4, 5, 9),
-                                                   (3, -10, -7),
-                                                   (3000000000, 100000000, sum(list1))])
+@mark.parametrize('a, b, expected_result', [(1, 2, 3),
+                                            (1, 1, 2),
+                                            (4, 5, 9),
+                                            (3, -10, -7),
+                                            (3000000000, 100000000, sum(list1))])
 def test_add(calc, a, b, expected_result):
     assert calc.add(a, b) == expected_result
 
@@ -40,3 +40,6 @@ def test_divide_by_zero(calc):
 def test_type_error(calc):
     with pytest.raises(TypeError):
         calc.add(4, "2")
+
+
+
